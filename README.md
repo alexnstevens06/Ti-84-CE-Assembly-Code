@@ -1,10 +1,18 @@
 # Ti-84-CE-Assembly-Code
 
+Programs for the TI-84 Plus CE graphing calculator (eZ80 CPU).
+
 `snake/` is a new Snake game for the TI-84 Plus CE. It was written for this repository and built with the CE C toolchain, CEdev 15.0 (`ez80-clang`). It is not older recovered source.
 
 Arrow keys move the snake. Eating the food grows it and raises the score. The game ends on a wall or on the snake's own body. Clear quits. After a loss, or if the board is full, Enter starts again.
 
-`ti84 assembly code.zip` is the earlier material that was already in the repo.
+`ti84 assembly code.zip` is the earlier material that was already in the repo: small eZ80 assembly programs for the TI-84 Plus CE, in folders named `hello world`, `good print`, `If Statements`, `infinite repeat(If and jumps) program`, `mapping ASCII table`, `mapping user input`, `DynamicUserInput`, `matrixText`, `quadraticEquation`, `sleep`, `Large Ram Reservation`, and `blank template`. It includes `build.bat` scripts for the SPASM assembler and built `.8xp` files.
+
+## Tech
+
+- C for the TI-84 Plus CE, built with the CE C/C++ toolchain (CEdev 15.0, `ez80-clang`)
+- CE libraries `graphx` (drawing) and `keypadc` (keypad input)
+- eZ80 assembly with SPASM for the older programs in the zip
 
 ## Build
 
@@ -15,3 +23,15 @@ make
 ```
 
 That writes `snake/bin/SNAKE.8xp`.
+
+## Run
+
+Send `SNAKE.8xp` to the calculator with TI Connect CE (or load it into the CEmu emulator) and start it from the program menu.
+
+## CI
+
+`.github/workflows/build.yml` downloads the CEdev 15.0 Linux release, runs `make` in `snake/`, and uploads `SNAKE.8xp` as a build artifact.
+
+## License
+
+GPL-3.0, see `LICENSE`.

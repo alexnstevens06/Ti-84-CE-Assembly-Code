@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install CEdev 15.0
+        run: |
+          curl -fsSL -o CEdev-Linux.tar.gz https://github.com/CE-Programming/toolchain/releases/download/v15.0/CEdev-Linux.tar.gz
+          tar -xzf CEdev-Linux.tar.gz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/CEdev/bin" >> "$GITHUB_PATH"
+      - name: Build snake
+        working-directory: snake
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SNAKE.8xp
+          path: snake/bin/SNAKE.8xp
